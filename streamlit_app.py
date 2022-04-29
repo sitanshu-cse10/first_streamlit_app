@@ -52,24 +52,50 @@ except URLError as e:
   streamlit.erro()
 
 
+#Snowflake -related functions
+def get_fruit_load_list():
+    with my_cnx.cursor() as my_cur:
+         my_cur.execute("select * from fruit_load_list")
+         return my_cur.fetchall()
+
+def insert_row_snowflake(new_fruit):
+    with my_cnx.cursor() as my_cur:
+         my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit')")
+
+         return "Thanks for addding "+new_fruit
+
+
+#Add a button to load the the fruit 
+if streamlit.button('Get fruit load list')
+   my_cnx=snowflake.connector.connect(**streamlit.secrets['snowflake'])
+   my_data_rows=get_fruit_load_list()
+   streamlit.dataframe(my_data_rows)
+
+add_my_fruit=streamlit.text_input('What fruit would you like to add?')
+if streamlit.button('Add a fruit to the list')
+   my_cnx=snowflake.connector.connect(**streamlit.secrets['snowflake'])
+   my_data_rows=insert_row_snowflake()
+   streamlit.dataframe(my_data_rows)
+
+    
 streamlit.stop()
 
 
-streamlit.write('The user entered',fruit_choice)
+#streamlit.write('The user entered',fruit_choice)
 #streamlit.dataframe(my_fruit_list)
-my_cnx = snowflake.connector.connect(**streamlit.secrets['snowflake'])
-my_cur = my_cnx.cursor()
+
+
 #my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 #my_data_row = my_cur.fetchone()
 streamlit.text("Hello from Snowflake:")
-my_cur.execute("select * from fruit_load_list")
-my_data_rows=my_cur.fetchall()
-streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_rows)
+#my_cur.execute("select * from fruit_load_list")
+#my_data_rows=my_cur.fetchall()
+#streamlit.header("The fruit load list contains:")
+#streamlit.dataframe(my_data_rows)
 
 #streamlit.text(my_data_row)
 
 
-fruit_choice_to_add=streamlit.text_input('What fruit would you like to add to the list ?','jackfruit')
-my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit')")
+#fruit_choice_to_add=streamlit.text_input('What fruit would you like to add to the list ?','jackfruit')
+#my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values ('from streamlit')")
 
