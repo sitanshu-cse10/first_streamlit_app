@@ -4,7 +4,7 @@ import requests
 import snowflake.connector
 
 from urllib.error import URLError
-streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
+streamlit.header('🍌🥭 Build Your Own Anfal 🥝🍇')
 
 streamlit.text('🥣 Omega 3 & Blueberry Oatmeal')
 streamlit.text('🥗 Kale, Spinach & Rocket Smoothie')
